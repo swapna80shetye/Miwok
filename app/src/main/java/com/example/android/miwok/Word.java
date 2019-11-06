@@ -5,7 +5,8 @@ public class Word {
     private String dtrans;
     private static int NO_IMAGE_FOUND = -1;
     private int imageID = NO_IMAGE_FOUND;
-
+    private int audio_to_play;
+    private int mAudioResourceId;
     public String getDtrans() {
         return dtrans;
     }
@@ -30,20 +31,26 @@ public class Word {
         this.mtrans = mtrans;
     }
 
-    public Word(String defaulttranslation, String mewaktranslation) {
+    public Word(String defaulttranslation, String mewaktranslation, int mAudioResourceId) {
         dtrans = defaulttranslation;
         mtrans = mewaktranslation;
+        this.mAudioResourceId=mAudioResourceId;
 
     }
 
-    public Word(String defaulttranslation, String mewaktranslation, int imageID) {
+    public Word(String defaulttranslation, String mewaktranslation, int imageID,int mAudioResourceId) {
         dtrans = defaulttranslation;
         mtrans = mewaktranslation;
         this.imageID = imageID;
+        this.mAudioResourceId=mAudioResourceId;
     }
 
     public boolean hasImage() {
         return (imageID != NO_IMAGE_FOUND);
+    }
+
+    public int getAudioResourceId() {
+        return mAudioResourceId;
     }
 }
 

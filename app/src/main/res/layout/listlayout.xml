@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/number_one" />
+        android:src="@drawable/number_one"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,14 +28,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            tools:text="Ek" />
+            tools:text="Ek"/>
 
         <TextView
             android:id="@+id/defaultNames"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            tools:text="one" />
+            tools:text="one"/>
     </LinearLayout>
 
 </LinearLayout>

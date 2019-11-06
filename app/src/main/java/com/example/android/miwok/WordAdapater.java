@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class WordAdapater extends ArrayAdapter<Word> {
+
 
     public WordAdapater(Activity context, ArrayList<Word> myword) {
         super(context, 0, myword);
@@ -29,7 +31,7 @@ public class WordAdapater extends ArrayAdapter<Word> {
         // Get the {@link AndroidFlavor} object located at this position in the list
         Word tobedisplayed = getItem(position);
 
-        TextView defaultnameTextView = (TextView) listItemView.findViewById(R.id.defaultNames);
+        final TextView defaultnameTextView = (TextView) listItemView.findViewById(R.id.defaultNames);
         defaultnameTextView.setText(tobedisplayed.getDtrans());
 
         TextView mewaknameTextView = (TextView) listItemView.findViewById(R.id.mewakNames);
