@@ -61,7 +61,7 @@ public class ColorsActivity extends AppCompatActivity {
         super.onStop();
         mpRelease();
     }
-
+//to release the unused resources
     private void mpRelease() {
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
