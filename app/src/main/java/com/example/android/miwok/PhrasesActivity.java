@@ -22,13 +22,12 @@ public class PhrasesActivity extends AppCompatActivity {
         //  LinearLayout MyView = (LinearLayout) findViewById(R.id.root);
 
 
-       final ArrayList<Word> nummer = new ArrayList<Word>();
+        final ArrayList<Word> nummer = new ArrayList<Word>();
 
-        nummer.add(new Word("hello","namaskar", R.drawable.number_one, R.raw.phrase_how_are_you_feeling));
-        nummer.add(new Word("thank you","dhanyawad", R.drawable.number_one, R.raw.phrase_yes_im_coming));
-        nummer.add(new Word("how are you?","kase ahat?", R.drawable.number_one, R.raw.number_one));
-        nummer.add(new Word("i'm fine","mi bari ahe", R.drawable.number_one, R.raw.number_one));
-
+        nummer.add(new Word("hello", "namaskar", R.raw.phrase_how_are_you_feeling));
+        nummer.add(new Word("thank you", "dhanyawad", R.raw.phrase_yes_im_coming));
+        nummer.add(new Word("how are you?", "kase ahat?", R.raw.number_one));
+        nummer.add(new Word("i'm fine", "mi bari ahe", R.raw.number_one));
 
 
         WordAdapater itemsAdapter = new WordAdapater(this, nummer);
@@ -41,7 +40,7 @@ public class PhrasesActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Word word=nummer.get(position);
+                Word word = nummer.get(position);
 
                 // Create and setup the {@link MediaPlayer} for the audio resource associated
                 // with the current word
@@ -49,9 +48,27 @@ public class PhrasesActivity extends AppCompatActivity {
 
                 // Start the audio file
                 mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mpRelease();
+                    }
+                });
             }
         });
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mpRelease();
+    }
+
+    private void mpRelease() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
 }

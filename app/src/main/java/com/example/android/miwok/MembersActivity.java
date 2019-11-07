@@ -22,15 +22,14 @@ public class MembersActivity extends AppCompatActivity {
         //  LinearLayout MyView = (LinearLayout) findViewById(R.id.root);
 
 
-       final ArrayList<Word> nummer = new ArrayList<Word>();
+        final ArrayList<Word> nummer = new ArrayList<Word>();
 
-        nummer.add(new Word("mom","aai",R.drawable.family_mother,R.raw.family_mother));
-        nummer.add(new Word("dad","baba",R.drawable.family_father,R.raw.family_father));
-        nummer.add(new Word("sister","didi",R.drawable.family_older_sister,R.raw.family_older_sister));
-        nummer.add(new Word("brother","dada",R.drawable.family_older_brother,R.raw.family_older_brother));
-        nummer.add(new Word("grandmother","aaji",R.drawable.family_grandmother,R.raw.family_grandmother));
-        nummer.add(new Word("grandfather","aajoba",R.drawable.family_grandfather,R.raw.family_grandfather));
-
+        nummer.add(new Word("mom", "aai", R.drawable.family_mother, R.raw.family_mother));
+        nummer.add(new Word("dad", "baba", R.drawable.family_father, R.raw.family_father));
+        nummer.add(new Word("sister", "didi", R.drawable.family_older_sister, R.raw.family_older_sister));
+        nummer.add(new Word("brother", "dada", R.drawable.family_older_brother, R.raw.family_older_brother));
+        nummer.add(new Word("grandmother", "aaji", R.drawable.family_grandmother, R.raw.family_grandmother));
+        nummer.add(new Word("grandfather", "aajoba", R.drawable.family_grandfather, R.raw.family_grandfather));
 
 
         WordAdapater itemsAdapter = new WordAdapater(this, nummer);
@@ -41,7 +40,7 @@ public class MembersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Word word=nummer.get(position);
+                Word word = nummer.get(position);
 
                 // Create and setup the {@link MediaPlayer} for the audio resource associated
                 // with the current word
@@ -49,9 +48,27 @@ public class MembersActivity extends AppCompatActivity {
 
                 // Start the audio file
                 mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mpRelease();
+                    }
+                });
             }
         });
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mpRelease();
+    }
+
+    private void mpRelease() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
 }
